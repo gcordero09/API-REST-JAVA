@@ -34,6 +34,14 @@ public class LibroController {
         return "Saved";
     }
 
+    @PostMapping(path = "/libros/backup") // Map ONLY POST Requests
+    public @ResponseBody String loadBackup (@RequestBody Iterable<LibroModel> libros) {
+        // @ResponseBody means the returned String is the response, not a view name
+
+        libroRepository.saveAll(libros);
+        return "Saved";
+    }
+
     @PutMapping(path = "/libros/{id}")
     public @ResponseBody String updateLibro(@RequestBody LibroModel libro, @PathVariable("id") Integer id){
         libro.setId(id);
